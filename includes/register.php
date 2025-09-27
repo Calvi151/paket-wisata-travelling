@@ -1,23 +1,35 @@
 <?php
 $con = mysqli_connect("localhost","root","","dbs_travell") or die("Koneksi gagal");
 
-if(isset($_POST['register'])){
-    $username = $_POST['username'];
-    $password = $_POST['password']; 
-    $role     = $_POST['role'];
-    $nama     = $_POST['nama'];
-    $email    = $_POST['email'];
-    $no_hp    = $_POST['no_hp'];
-    $alamat   = $_POST['alamat'];
+$username = "";
+$password = "";
+$role = "";
+$nama = "";
+$email = "";
+$no_hp = "";
+$alamat = "";
+$nameBtn ="input";
+$valueBtn ="submit";
 
-    $query = "INSERT INTO users (username,password,role,nama,email,no_hp,alamat)
-              VALUES ('$username','$password','$role','$nama','$email','$no_hp','$alamat')";
+if(isset($_POST['submit']) && $_POST['submit']=='input'){
+    $query = "INSERT INTO users(username, password, role, nama,  email, no_hp, alamat)
+                                VALUES(
+                                 '".$_POST['username']."',
+                                 '".$_POST['password']."',
+                                 '".$_POST['role']."',
+                                 '".$_POST['nama']."',
+                                 '".$_POST['email']."',
+                                 '".$_POST['no_hp']."',
+                                 '".$_POST['alamat']."'
+                                    )";
+
     if(mysqli_query($con, $query)){
         echo "<script>alert('Registrasi berhasil, silakan login'); window.location='login.php';</script>";
     }else{
         echo "Gagal registrasi: " . mysqli_error($con);
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +52,9 @@ if(isset($_POST['register'])){
             width: 350px;
             padding: 25px;
             background: linear-gradient(white, lightblue);
+            border-radius: 20px;
+            box-shadow: 5px 10px 18px #888888;
+            font-family: Arial, Helvetica, sans-serif;
         }
         input{
             margin: 10px;
@@ -48,7 +63,7 @@ if(isset($_POST['register'])){
         body{
             display: flex;
             justify-content: center;
-            background-color: ;
+           
         }
         input, select, button{
             padding: 10px;
@@ -73,6 +88,9 @@ if(isset($_POST['register'])){
 </head>
 <body>
     <form action="" method="post">
+        <h1>
+            Register Account
+        </h1>
         <div>
             <label for="username">Username</label>
             <input type="text" name="username" id="username" required>
@@ -107,7 +125,7 @@ if(isset($_POST['register'])){
             <input type="text" name="alamat" id="alamat" >
         </div>
       </div>
-      <button type="submit" name="register">Register
+      <button type="submit" name="submit" value="<?php echo $nameBtn ?>"><?php echo $valueBtn ?>
       </button>
     </form>
 
