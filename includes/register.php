@@ -2,7 +2,6 @@
 $con = mysqli_connect("localhost","root","","dbs_travell") or die("Koneksi gagal");
 
 $username = "";
-$password = "";
 $role = "";
 $nama = "";
 $email = "";
@@ -12,10 +11,11 @@ $nameBtn ="input";
 $valueBtn ="submit";
 
 if(isset($_POST['submit']) && $_POST['submit']=='input'){
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $query = "INSERT INTO users(username, password, role, nama,  email, no_hp, alamat)
                                 VALUES(
                                  '".$_POST['username']."',
-                                 '".$_POST['password']."',
+                                 '".$password."',
                                  '".$_POST['role']."',
                                  '".$_POST['nama']."',
                                  '".$_POST['email']."',
@@ -39,6 +39,13 @@ if(isset($_POST['submit']) && $_POST['submit']=='input'){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>register</title>
     <style>
+
+    .pw-wrap{position:relative; width:300px;}
+    .pw-wrap input{width:100%; padding:10px 40px 10px 10px; box-sizing:border-box;}
+    .eye-btn{
+      position:absolute; right:6px; top:50%; transform:translateY(-50%);
+      background:transparent; border:none; cursor:pointer; padding:4px;
+    }
         .hidden{
             display: none;
         }
@@ -95,9 +102,11 @@ if(isset($_POST['submit']) && $_POST['submit']=='input'){
             <label for="username">Username</label>
             <input type="text" name="username" id="username" required>
         </div>
-        <div>
-            <label for="password">Password</label>
+        <div class="pw-wrap">
+            <label for="password" >Password</label>
             <input type="password" name="password" id="password" required>
+            <button type="button" class="eye-btn" id="toggle">
+                <span id="eye-icon">👁️</span>
         </div>
         <div>
             <label for="role">Role</label>
@@ -140,7 +149,17 @@ if(isset($_POST['submit']) && $_POST['submit']=='input'){
                     customsfield.classList.add("hidden");
                 }
             }
-        
+          document.getElementById("toggle").addEventListener("click", function() {
+        const pwInput = document.getElementById("password");
+        const eyeIcon = document.getElementById("eye-icon");
+        if (pwInput.type === "password") {
+            pwInput.type = "text";
+            eyeIcon.textContent = "🙈";
+        } else {
+            pwInput.type = "password";
+            eyeIcon.textContent = "👁️";
+        }
+    });
     </script>
 </body>
 </html>

@@ -1,41 +1,48 @@
 <?php
 session_start();
-$con = mysqli_connect("localhost","root", "","dbs_travell") or die("Koneksi gagal");
+$con = mysqli_connect("localhost","root","","dbs_travell") or die("Koneksi gagal");
 
 if (isset($_POST['login'])) {
     $username = mysqli_real_escape_string($con, $_POST['username']);
     $password = $_POST['password'];
+    $role = $_POST['role'];
 
-    $result = mysqli_query($con, "SELECT * FROM users WHERE username = '$username'");
+    // Query user berdasarkan username dan role
+    $result = mysqli_query($con, "SELECT * FROM users WHERE username='$username' AND role='$role'");    
 
     if (mysqli_num_rows($result) === 1) {
-        $row = mysqli_fetch_assoc($result);
+        $row = mysqli_fetch_assoc($result); // <-- harus di-fetch dulu
 
+
+        // Cek password
         if (password_verify($password, $row['password'])) {
-            // simpan session
             $_SESSION['login'] = true;
             $_SESSION['username'] = $row['username'];
             $_SESSION['role'] = $row['role'];
+
             if ($row['role'] == 'admin') {
                 header("Location: admin_dashboard.php");
+                exit;
             } else {
                 header("Location: user_dashboard.php");
+                exit;
             }
-            exit;
         } else {
-            echo "<script>alert('Login gagal, periksa username dan password Anda'); window.location='login.php';</script>";
+            echo "<script>alert('Login gagal! Password salah.'); window.location='login.php';</script>";
         }
     } else {
-        echo "<script>alert('Login gagal, periksa username dan password Anda'); window.location='login.php';</script>";
+        echo "<script>alert('Login gagal! Username atau role tidak ditemukan.'); window.location='login.php';</script>";
     }
-    } 
+}
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>register</title>
+    <title>login</title>
     <style>
         .hidden{
             display: none;
@@ -63,7 +70,7 @@ if (isset($_POST['login'])) {
             justify-content: center;
            
         }
-        input, select, button{
+        input, select {
             padding: 10px;
             border-radius: 5px;
             border: 2px solid black;
@@ -80,14 +87,20 @@ if (isset($_POST['login'])) {
         button{
             cursor: pointer;
             background-color: orange;
+            padding: 15px;
+            border-radius: 5px;
+            border: 2px solid black;
+            margin: 4px;
+            width: 200px;
         }
+
 
     </style>
 </head>
 <body>
     <form action="" method="post">
         <h1>
-            Register Account
+            Login Account
         </h1>
         <div>
             <label for="username">Username</label>
@@ -123,7 +136,7 @@ if (isset($_POST['login'])) {
             <input type="text" name="alamat" id="alamat" >
         </div>
       </div>
-      <button type="submit" name="submit" value="<?php echo $nameBtn ?>"><?php echo $valueBtn ?>
+      <button type="submit" name="login" >login
       </button>
     </form>
 
@@ -138,7 +151,6 @@ if (isset($_POST['login'])) {
                     customsfield.classList.add("hidden");
                 }
             }
-        
     </script>
 </body>
 </html>
