@@ -1,8 +1,8 @@
 <?php
 $con= mysqli_connect("localhost","root","","dbs_travell") or die ("Connection eror");
-$total_users = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) as total FROM users"))['total'];
-//$total_laporan = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) as total FROM laporan"))['total'];
-
+$total_admin = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) as total FROM users WHERE role='admin'"))['total'];
+$total_member = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) as total FROM users WHERE role='user'"))['total'];
+$pilih_admin = mysqli_query($con, "SELECT username from users WHERE role='admin' ORDER BY created_at DESC LIMIT 3" );
 ?>
 
 
@@ -26,6 +26,7 @@ $total_users = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) as total F
         <ul>
             <li><a href="admin_dashboard.php">Dashboard</a></li>
             <li><a href="manage_users.php">Manage Users</a></li>
+            <li><a href="manage_paket.php">Manage Paket Wisata</a></li>
             <li><a href="settings.php">Settings</a></li>
             <li><a href="reports.php">Reports</a></li>
             <li><a href="logout.php">Logout</a></li>
@@ -33,10 +34,19 @@ $total_users = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) as total F
     </div>
     <div class="cards" id="cards">
       <div class="card"> <h3>Total dari 
-        Semua User Terdaftar</h3> <br>👤 Total Users: <?php echo $total_users; ?></div>
-      <!-- <div class="card">📦 Total Produk: <?php //echo $total_laporan; ?></div>
-      <div class="card">💵 Total Transaksi: <?php //echo $total_transaksi; ?></div> -->
+        Semua Admin Terdaftar</h3> 👤 Total Users: <?php echo $total_admin; ?>
+    <br>
+        Beberapa list Nama Admin di tempat ini
+    <br>
+        <ul>
+            <?php while($row = mysqli_fetch_assoc($pilih_admin)) { ?>
+                <li><?php echo $row['username']; ?></li>
+            <?php } ?>
+        </ul></div>
+        <div class="card"> <h3>Total dari 
+        Semua Member Terdaftar</h3> 👤 Total Users: <?php echo $total_member; ?></div>
         </div>
+
     </div>
     <script src="../scripts/script.js"></script>
 </body>
