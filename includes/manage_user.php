@@ -19,7 +19,7 @@ $paket = mysqli_query($con, "SELECT * FROM paket_wisata");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard User - Travell</title>
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/sty">
 </head>
 <body>
     <div class="container">

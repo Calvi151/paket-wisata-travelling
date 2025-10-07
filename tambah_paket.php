@@ -25,7 +25,7 @@ $query = mysqli_query($con, "INSERT INTO paket_wisata (paket_id, nama_paket, tuj
 VALUES ('$paket_id', '$nama_paket', '$tujuan', '$deskripsi', '$harga', '$durasi', '$foto')");
 
 if($query){
-    echo "<script>alert('Paket travel berhasil ditambahkan'); window.location='admin_dashboard.php';</script>";
+    echo "<script>alert('Paket travel berhasil ditambahkan'); window.location='/includes/admin_dashboard.php';</script>";
 } else {
     echo "Error: " . mysqli_error($con);
 }

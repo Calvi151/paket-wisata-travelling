@@ -25,7 +25,7 @@ $pilih_admin = mysqli_query($con, "SELECT username from users WHERE role='admin'
    <div class="sidebar" id="sidebar">
         <ul>
             <li><a href="admin_dashboard.php">Dashboard</a></li>
-            <li><a href="manage_users.php">Manage Users</a></li>
+            <li><a href="manage_user.php">Manage Users</a></li>
             <li><a href="manage_paket.php">Manage Paket Wisata</a></li>
             <li><a href="settings.php">Settings</a></li>
             <li><a href="reports.php">Reports</a></li>
