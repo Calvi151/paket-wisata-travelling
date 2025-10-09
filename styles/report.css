@@ -1,0 +1,78 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f9fc;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #2e86de;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #7f8c8d;
+    margin-bottom: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead {
+    background-color: #2e86de;
+    color: white;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+    background-color: #f1f5ff;
+}
+
+.status {
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: white;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status.pending {
+    background-color: #f39c12;
+}
+
+.status.confirmed {
+    background-color: #27ae60;
+}
+
+.status.canceled {
+    background-color: #e74c3c;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #2e86de;
+    color: white;
+    margin-top: 40px;
+    border-top: 3px solid #1b4f8b;
+}

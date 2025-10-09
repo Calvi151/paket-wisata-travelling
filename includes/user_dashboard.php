@@ -1,18 +1,13 @@
 <?php
 session_start();
-$con = mysqli_connect("localhost", "root", "", "dbs_travell") or die("Koneksi gagal");
+$con = mysqli_connect("localhost", "root", "passwordbaru", "dbs_travell") or die("Koneksi gagal");
 
-// Pastikan hanya user yang bisa masuk
-if (!isset($_SESSION['username']) || $_SESSION['role'] != 'user') {
-    header("Location: login.php");
-    exit;
-}
+
 
 $username = $_SESSION['username'];
 $user = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM users WHERE username='$username'"));
-$paket = mysqli_query($con, "SELECT * FROM paket_wisata");
+$rekomen = mysqli_query($con, "SELECT * FROM paket_wisata ORDER BY paket_id DESC LIMIT 3");
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -22,49 +17,54 @@ $paket = mysqli_query($con, "SELECT * FROM paket_wisata");
     <link rel="stylesheet" href="../styles/style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h2>Selamat Datang, <?= $user['nama']; ?> 👋</h2>
-            <a href="logout.php" class="logout">Keluar</a>
+<div class="dashboard"> 
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">TRAVELL</div>
+        <div class="user-panel">
+            <div class="avatar"></div>
+            <p class="username"><?= htmlspecialchars($user['nama']); ?></p>
+            <p class="user-email"><?= htmlspecialchars($user['email']); ?></p>
         </div>
-        
-        <div class="profile">
-            <div class="profile-header">
-                <h3>Informasi Profil</h3>
-            </div>
-            <div class="profile-info">
-                <div class="info-item">
-                    <span class="info-label">Email</span>
-                    <span class="info-value"><?= $user['email']; ?></span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">No. HP</span>
-                    <span class="info-value"><?= $user['no_hp']; ?></span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Alamat</span>
-                    <span class="info-value"><?= $user['alamat']; ?></span>
-                </div>
-            </div>
-        </div>
-        
-        <h3 class="section-title">Daftar Paket Wisata</h3>
-        <div class="paket">
-            <?php while ($p = mysqli_fetch_assoc($paket)) { ?>
-                <div class="card">
-                    <img src="../uploads/<?= $p['foto']; ?>" alt="<?= $p['nama_paket']; ?>" class="card-img">
-                    <div class="card-content">
-                        <h4 class="card-title"><?= $p['nama_paket']; ?></h4>
-                        <div class="card-destination"><?= $p['tujuan']; ?></div>
-                        <p class="card-description"><?= $p['deskripsi']; ?></p>
-                        <div class="card-footer">
-                            <span class="card-price">Rp<?= number_format($p['harga'], 0, ',', '.'); ?></span>
-                            <span class="card-duration"><?= $p['durasi']; ?></span>
+        <ul class="menu">
+            <li><a href="#" class="active">Dashboard</a></li>
+            <li><a href="profile.php">Profile</a></li>
+            <li><a href="transaksi.php">Paket Wisata</a></li>
+        </ul>
+        <a href="logout.php" class="logout">Logout</a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+         <header class="header">
+        Halo <?php echo $user['nama']?>
+    </header>   
+        <header class="topbar">
+            <input type="text" class="search" placeholder="Cari sesuatu...">
+        </header>
+
+        <section class="content">
+            <h2>Paket Wisata Rekomendasi</h2>
+            <div class="paket-container">
+                <?php while ($p = mysqli_fetch_assoc($rekomen)) { ?>
+                    <div class="paket-card">
+                        <div class="img-box">
+                            <img src="../uploads/<?= htmlspecialchars($p['foto']); ?>" alt="<?= htmlspecialchars($p['nama_paket']); ?>">
+                        </div>
+                        <div class="paket-content">
+                            <h4><?= htmlspecialchars($p['nama_paket']); ?></h4>
+                            <p class="tujuan"><?= htmlspecialchars($p['tujuan']); ?></p>
+                            <p class="deskripsi"><?= htmlspecialchars($p['deskripsi']); ?></p>
+                            <div class="card-footer">
+                                <span class="harga">Rp<?= number_format($p['harga'], 0, ',', '.'); ?></span>
+                                <span class="durasi"><?= htmlspecialchars($p['durasi']); ?></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php } ?>
-        </div>
-    </div>
+                <?php } ?>
+            </div>
+        </section>
+    </main>
+</div>
 </body>
 </html>

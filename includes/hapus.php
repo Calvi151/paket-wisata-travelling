@@ -1,5 +1,5 @@
 <?php
-$con = mysqli_connect("localhost", "root", "", "dbs_travell") or die("Koneksi gagal");
+$con = mysqli_connect("localhost", "root", "passwordbaru", "dbs_travell") or die("Koneksi gagal");
 
 if (isset($_GET['paket_id'])) {
     $id = $_GET['paket_id'];

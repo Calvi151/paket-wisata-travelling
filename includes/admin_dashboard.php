@@ -1,8 +1,9 @@
 <?php
-$con= mysqli_connect("localhost","root","","dbs_travell") or die ("Connection eror");
+$con= mysqli_connect("localhost","root","passwordbaru","dbs_travell") or die ("Connection eror");
 $total_admin = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) as total FROM users WHERE role='admin'"))['total'];
 $total_member = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) as total FROM users WHERE role='user'"))['total'];
 $pilih_admin = mysqli_query($con, "SELECT username from users WHERE role='admin' ORDER BY created_at DESC LIMIT 3" );
+$pilih_member = mysqli_query($con, "SELECT username from users WHERE role='user' ORDER BY created_at DESC LIMIT 3" );
 ?>
 
 
@@ -11,7 +12,7 @@ $pilih_admin = mysqli_query($con, "SELECT username from users WHERE role='admin'
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin</title>
     
     <link rel="stylesheet" href="../styles/styles.css">
 </head>
@@ -28,7 +29,7 @@ $pilih_admin = mysqli_query($con, "SELECT username from users WHERE role='admin'
             <li><a href="manage_user.php">Manage Users</a></li>
             <li><a href="manage_paket.php">Manage Paket Wisata</a></li>
             <li><a href="settings.php">Settings</a></li>
-            <li><a href="reports.php">Reports</a></li>
+            <li><a href="report.php">Reports</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </div>
@@ -42,11 +43,17 @@ $pilih_admin = mysqli_query($con, "SELECT username from users WHERE role='admin'
             <?php while($row = mysqli_fetch_assoc($pilih_admin)) { ?>
                 <li><?php echo $row['username']; ?></li>
             <?php } ?>
-        </ul></div>
+        </ul>
+    </div>
         <div class="card"> <h3>Total dari 
-        Semua Member Terdaftar</h3> 👤 Total Users: <?php echo $total_member; ?></div>
+        Semua Member Terdaftar</h3> 👤 Total Users: <?php echo $total_member; ?>
+        <p>beberapa nama member</p>
+         <ul>
+                <?php while($row = mysqli_fetch_assoc($pilih_member)) { ?>
+                <li><?php echo $row['username']; ?></li>
+            <?php } ?>
+        </ul></div>
         </div>
-
     </div>
     <script src="../scripts/script.js"></script>
 </body>

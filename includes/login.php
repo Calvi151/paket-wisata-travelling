@@ -1,6 +1,6 @@
 <?php
 session_start();
-$con = mysqli_connect("localhost","root","","dbs_travell") or die("Koneksi gagal");
+$con = mysqli_connect("localhost","root","passwordbaru","dbs_travell") or die("Koneksi gagal");
 
 if (isset($_POST['login'])) {
     $username = mysqli_real_escape_string($con, $_POST['username']);

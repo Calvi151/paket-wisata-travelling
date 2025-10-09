@@ -1,8 +1,15 @@
 body{
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   margin: 0;
-  background-color: #1d1515;
+  background: linear-gradient(white,rgb(63, 101, 124));
+  background-attachment: fixed;
 }
+
+html, body {
+  height: 100%;
+  min-height: 100vh;
+}
+
 .header {
     display: flex;
     top: 0;
@@ -38,7 +45,7 @@ body{
       display: block;
     }
     .sidebar a:hover {
-      background: #575757;
+      background: #a01b1b;
     }
     .openbtn {
       font-size: 20px;
@@ -64,14 +71,14 @@ body{
       display: grid;
       gap: 10px;
       margin: 10px ;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
     }
     .card{
-      background: linear-gradient(rgb(238, 14, 14), rgb(85, 45, 45), rgb(88, 79, 79));
+      background: white;
       padding: 30px ;
-      color: white;
+      color: rgb(1, 1, 1);
       border-radius: 20px;
-      box-shadow: #692626;
+      box-shadow: #000000;
       border: solid black 2px;
       transition: all 0.3s ease-in;
       

@@ -1,0 +1,137 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(white,rgb(60, 98, 118));
+    margin: 0;
+    padding: 0;
+    color: #000000;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #2e86de;
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #1d2122;
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+.paket-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 3fr));
+    gap: 25px;
+    justify-items: center;
+}
+
+.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    width: 100%;
+    max-width: 340px;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 18px;
+    text-align: left;
+}
+
+.card-body h3 {
+    margin: 0;
+    color: #2e86de;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.tujuan {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.deskripsi {
+    font-size: 0.9rem;
+    color: #555;
+    height: 50px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.harga {
+    color: #27ae60;
+}
+
+.durasi {
+    color: #2980b9;
+    font-size: 0.9rem;
+}
+
+.btn-pesan {
+    width: 100%;
+    background-color: #2e86de;
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 10px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-pesan:hover {
+    background-color: #1b4f8b;
+}
+
+/* Footer */
+footer {
+    margin-top: 50px;
+    background: #0c243b;
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.footer-links {
+    margin-top: 10px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
